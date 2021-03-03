@@ -4,7 +4,11 @@ import java.time.LocalDateTime;
 
 public class MemberRegisterService {
 
-    private MemberDao memberDao = new MemberDao();
+    private MemberDao memberDao;
+
+    public MemberRegisterService(MemberDao memberDao) {
+        this.memberDao = memberDao;
+    }
 
     public void register(RegisterRequest req) {
         Member member = memberDao.selectByEmail(req.getEmail());
