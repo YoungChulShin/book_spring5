@@ -2,9 +2,7 @@ package study.spring.ch2_di.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import study.spring.ch2_di.ChangePasswordService;
-import study.spring.ch2_di.MemberDao;
-import study.spring.ch2_di.MemberRegisterService;
+import study.spring.ch2_di.*;
 
 @Configuration
 public class AppCtx {
@@ -24,5 +22,15 @@ public class AppCtx {
         ChangePasswordService changePasswordService = new ChangePasswordService();
         changePasswordService.setMemberDao(memberDao());
         return changePasswordService;
+    }
+
+    @Bean
+    public MemberPrinter memberPrinter() {
+        return new MemberPrinter();
+    }
+
+    @Bean
+    public MemberListPrinter listPrinter() {
+        return new MemberListPrinter(memberDao(), memberPrinter());
     }
 }

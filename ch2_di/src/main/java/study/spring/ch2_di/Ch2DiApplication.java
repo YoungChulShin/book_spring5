@@ -32,6 +32,9 @@ public class Ch2DiApplication {
             } else if (command.startsWith("change ")) {
                 processChangeCommand(command.split(" "));
                 continue;
+            } else if (command.equalsIgnoreCase("list")) {
+                processListCommand();
+                continue;
             }
             printHelp();
         }
@@ -85,6 +88,11 @@ public class Ch2DiApplication {
         } catch (WrongPasswordException e) {
             System.out.println("이메일과 암호가 일치하지 않습니다\n");
         }
+    }
+
+    private static void processListCommand() {
+        MemberListPrinter memberListPrinter = ctx.getBean("listPrinter", MemberListPrinter.class);
+        memberListPrinter.printAll();
     }
 
     private static void printHelp() {
