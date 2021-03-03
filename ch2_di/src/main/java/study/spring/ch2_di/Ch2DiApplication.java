@@ -1,8 +1,8 @@
 package study.spring.ch2_di;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import study.spring.ch2_di.assembler.Assembler;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import study.spring.ch2_di.config.AppCtx;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,10 +11,12 @@ import java.io.InputStreamReader;
 // @SpringBootApplication
 public class Ch2DiApplication {
 
-    private static Assembler assembler = new Assembler();
+    private static ApplicationContext ctx = null;
 
     public static void main(String[] args) throws IOException {
         //SpringApplication.run(Ch2DiApplication.class, args);
+
+        ctx = new AnnotationConfigApplicationContext(AppCtx.class);
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         while (true) {
@@ -44,7 +46,7 @@ public class Ch2DiApplication {
             return;
         }
 
-        MemberRegisterService registerService = assembler.getMemberRegisterService();
+        MemberRegisterService registerService = ctx.getBean("memberRegisterService", MemberRegisterService.class);
         RegisterRequest registerRequest = new RegisterRequest();
         registerRequest.setEmail(args[1]);
         registerRequest.setName(args[2]);
@@ -73,7 +75,8 @@ public class Ch2DiApplication {
             return;
         }
 
-        ChangePasswordService changePasswordService = assembler.getChangePasswordService();
+        ChangePasswordService changePasswordService =
+                ctx.getBean("changePasswordService", ChangePasswordService.class);
         try {
             changePasswordService.changePassword(args[1], args[2], args[3]);
             System.out.println("비밀번호를 변경했습니다\n");
