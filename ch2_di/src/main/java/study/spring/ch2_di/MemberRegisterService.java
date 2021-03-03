@@ -10,7 +10,7 @@ public class MemberRegisterService {
         this.memberDao = memberDao;
     }
 
-    public void register(RegisterRequest req) {
+    public Long register(RegisterRequest req) {
         Member member = memberDao.selectByEmail(req.getEmail());
 
         if (member != null) {
@@ -19,5 +19,7 @@ public class MemberRegisterService {
 
         Member newMember = new Member(req.getEmail(), req.getPassword(), req.getName(), LocalDateTime.now());
         memberDao.insert(newMember);
+
+        return newMember.getId();
     }
 }
