@@ -18,7 +18,7 @@ public class Ch2DiApplication {
     public static void main(String[] args) throws IOException {
         //SpringApplication.run(Ch2DiApplication.class, args);
 
-        ctx = new AnnotationConfigApplicationContext(AppConf1.class, AppConf2.class);
+        ctx = new AnnotationConfigApplicationContext(AppConf1.class);
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         while (true) {
