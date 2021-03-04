@@ -35,6 +35,9 @@ public class Ch2DiApplication {
             } else if (command.equalsIgnoreCase("list")) {
                 processListCommand();
                 continue;
+            } else if (command.startsWith("info ")) {
+                processInfoCommand(command.split(" "));
+                continue;
             }
             printHelp();
         }
@@ -93,6 +96,16 @@ public class Ch2DiApplication {
     private static void processListCommand() {
         MemberListPrinter memberListPrinter = ctx.getBean("listPrinter", MemberListPrinter.class);
         memberListPrinter.printAll();
+    }
+
+    private static void processInfoCommand(String[] args) {
+        if (args.length != 2) {
+            printHelp();
+            return;
+        }
+
+        MemberInfoPrinter infoPrinter = ctx.getBean("infoPrinter", MemberInfoPrinter.class);
+        infoPrinter.printMemberInfo(args[1]);
     }
 
     private static void printHelp() {
