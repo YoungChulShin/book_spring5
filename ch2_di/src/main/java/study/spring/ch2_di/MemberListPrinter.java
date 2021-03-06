@@ -28,7 +28,7 @@ public class MemberListPrinter {
     }
 
     @Autowired
-    @Qualifier("printer")
+    @Qualifier("summaryPrinter")
     public void setMemberPrinter(MemberPrinter memberPrinter) {
         this.memberPrinter = memberPrinter;
     }

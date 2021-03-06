@@ -23,11 +23,6 @@ public class AppCtx {
         return new ChangePasswordService();
     }
 
-//    @Bean
-//    public MemberPrinter memberPrinter() {
-//        return new MemberPrinter();
-//    }
-
     @Bean
     @Qualifier("printer")
     public MemberPrinter memberPrinter1() {
@@ -35,8 +30,9 @@ public class AppCtx {
     }
 
     @Bean
-    public MemberPrinter memberPrinter2() {
-        return new MemberPrinter();
+    @Qualifier("summaryPrinter")
+    public MemberSummaryPrinter memberPrinter2() {
+        return new MemberSummaryPrinter();
     }
 
     @Bean
