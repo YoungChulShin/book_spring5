@@ -1,6 +1,7 @@
 package study.spring.ch2_di;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.util.Collection;
 
@@ -27,6 +28,7 @@ public class MemberListPrinter {
     }
 
     @Autowired
+    @Qualifier("printer")
     public void setMemberPrinter(MemberPrinter memberPrinter) {
         this.memberPrinter = memberPrinter;
     }

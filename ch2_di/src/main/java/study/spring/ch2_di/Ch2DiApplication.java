@@ -2,8 +2,7 @@ package study.spring.ch2_di;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import study.spring.ch2_di.config.AppConf1;
-import study.spring.ch2_di.config.AppConf2;
+import study.spring.ch2_di.config.AppCtx;
 //import study.spring.ch2_di.config.AppCtx;
 
 import java.io.BufferedReader;
@@ -18,7 +17,7 @@ public class Ch2DiApplication {
     public static void main(String[] args) throws IOException {
         //SpringApplication.run(Ch2DiApplication.class, args);
 
-        ctx = new AnnotationConfigApplicationContext(AppConf1.class);
+        ctx = new AnnotationConfigApplicationContext(AppCtx.class);
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         while (true) {
