@@ -1,5 +1,7 @@
 package study.spring.ch2_di;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.Collection;
 
 public class MemberListPrinter {
@@ -7,6 +9,8 @@ public class MemberListPrinter {
     private MemberDao memberDao;
     private MemberPrinter memberPrinter;
 
+    public MemberListPrinter() {
+    }
     public MemberListPrinter(MemberDao memberDao, MemberPrinter memberPrinter) {
         this.memberDao = memberDao;
         this.memberPrinter = memberPrinter;
@@ -15,5 +19,15 @@ public class MemberListPrinter {
     public void printAll() {
         Collection<Member> members = memberDao.selectAll();
         members.forEach(m -> memberPrinter.print(m));
+    }
+
+    @Autowired
+    public void setMemberDao(MemberDao memberDao) {
+        this.memberDao = memberDao;
+    }
+
+    @Autowired
+    public void setMemberPrinter(MemberPrinter memberPrinter) {
+        this.memberPrinter = memberPrinter;
     }
 }
