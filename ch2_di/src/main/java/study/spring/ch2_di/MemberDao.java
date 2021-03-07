@@ -1,9 +1,12 @@
 package study.spring.ch2_di;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+@Component
 public class MemberDao {
 
     private static long nextId = 0;

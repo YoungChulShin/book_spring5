@@ -1,7 +1,9 @@
 package study.spring.ch2_di;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ChangePasswordService {
 
     @Autowired

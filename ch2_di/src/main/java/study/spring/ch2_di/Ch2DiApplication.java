@@ -53,7 +53,7 @@ public class Ch2DiApplication {
             return;
         }
 
-        MemberRegisterService registerService = ctx.getBean("memberRegisterService", MemberRegisterService.class);
+        MemberRegisterService registerService = ctx.getBean(MemberRegisterService.class);
         RegisterRequest registerRequest = new RegisterRequest();
         registerRequest.setEmail(args[1]);
         registerRequest.setName(args[2]);
@@ -82,8 +82,7 @@ public class Ch2DiApplication {
             return;
         }
 
-        ChangePasswordService changePasswordService =
-                ctx.getBean("changePasswordService", ChangePasswordService.class);
+        ChangePasswordService changePasswordService = ctx.getBean(ChangePasswordService.class);
         try {
             changePasswordService.changePassword(args[1], args[2], args[3]);
             System.out.println("비밀번호를 변경했습니다\n");

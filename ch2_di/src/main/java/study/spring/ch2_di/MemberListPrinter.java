@@ -2,9 +2,11 @@ package study.spring.ch2_di;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 
+@Component("listPrinter")
 public class MemberListPrinter {
 
     private MemberDao memberDao;
