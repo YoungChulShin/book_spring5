@@ -1,12 +1,14 @@
 package study.spring.ch2_di;
 
 import org.springframework.stereotype.Component;
+import study.spring.ch2_di.annotations.NoProduct;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
 @Component
+@NoProduct
 public class MemberDao {
 
     private static long nextId = 0;

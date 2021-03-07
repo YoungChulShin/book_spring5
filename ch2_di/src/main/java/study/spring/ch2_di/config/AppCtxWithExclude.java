@@ -8,11 +8,13 @@ import org.springframework.stereotype.Component;
 import study.spring.ch2_di.MemberDao;
 import study.spring.ch2_di.MemberPrinter;
 import study.spring.ch2_di.MemberSummaryPrinter;
+import study.spring.ch2_di.annotations.ManualBean;
+import study.spring.ch2_di.annotations.NoProduct;
 
 @Component
 @ComponentScan(
         basePackages = {"study"},
-        excludeFilters = @ComponentScan.Filter(type = FilterType.REGEX, pattern = "study\\..*Dao"))
+        excludeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = {NoProduct.class, ManualBean.class}))
 public class AppCtxWithExclude {
     @Bean
     public MemberDao memberDao() {
