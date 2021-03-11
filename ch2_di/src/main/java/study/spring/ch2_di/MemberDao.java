@@ -1,33 +1,24 @@
 package study.spring.ch2_di;
 
 import org.springframework.stereotype.Component;
-import study.spring.ch2_di.annotations.NoProduct;
 
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
 @Component
-@NoProduct
 public class MemberDao {
 
-    private static long nextId = 0;
-    private Map<String, Member> map = new HashMap<>();
-
     public Member selectByEmail(String email) {
-        return map.get(email);
+        return null;
     }
 
     public void insert(Member member) {
-        member.setId(++nextId);
-        map.put(member.getEmail(), member);
     }
 
     public void update(Member member) {
-        map.put(member.getEmail(), member);
+
     }
 
     public Collection<Member> selectAll() {
-        return map.values();
+        return null;
     }
 }

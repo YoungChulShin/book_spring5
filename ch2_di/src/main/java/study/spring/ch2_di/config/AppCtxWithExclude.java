@@ -16,10 +16,6 @@ import study.spring.ch2_di.annotations.NoProduct;
         basePackages = {"study"},
         excludeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = {NoProduct.class, ManualBean.class}))
 public class AppCtxWithExclude {
-    @Bean
-    public MemberDao memberDao() {
-        return new MemberDao();
-    }
 
     @Bean
     @Qualifier("printer")
