@@ -16,6 +16,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation 'org.apache.tomcat:tomcat-jdbc'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+
 }
 
 test {
