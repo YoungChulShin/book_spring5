@@ -2,6 +2,8 @@ package study.spring.ch2_di;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 import study.spring.ch2_di.mapper.MemberRowMapper;
 
@@ -29,16 +31,21 @@ public class MemberDao {
     }
 
     public void insert(Member member) {
+        KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(con -> {
             PreparedStatement preparedStatement = con.prepareStatement(
-                    "insert into MEMBER(EMAIL. PASSWORD, NAME, REGDATE) values (?,?,?,?)");
+                    "insert into MEMBER(EMAIL. PASSWORD, NAME, REGDATE) values (?,?,?,?)",
+                    new String[]{"ID"});
             preparedStatement.setString(1, member.getEmail());
             preparedStatement.setString(2, member.getPassword());
             preparedStatement.setString(3, member.getName());
             preparedStatement.setTimestamp(4, Timestamp.valueOf(member.getRegisterDateTime()));
 
             return preparedStatement;
-        });
+        }, keyHolder);
+
+        Number keyValue = keyHolder.getKey();
+        member.setId(keyValue.longValue());
     }
 
     public void update(Member member) {
