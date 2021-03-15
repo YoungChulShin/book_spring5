@@ -8,40 +8,76 @@ import study.spring.ch2_di.config.AppCtxWithExclude;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Collection;
 
 // @SpringBootApplication
 public class Ch2DiApplication {
 
     private static ApplicationContext ctx = null;
 
+    private static MemberDao memberDao;
+
     public static void main(String[] args) throws IOException {
         //SpringApplication.run(Ch2DiApplication.class, args);
 
-        ctx = new AnnotationConfigApplicationContext(AppCtxWithExclude.class);
+//        ctx = new AnnotationConfigApplicationContext(AppCtxWithExclude.class);
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        while (true) {
-            System.out.println("명령어를 입력하세요");
-            String command = reader.readLine();
-            if (command.equalsIgnoreCase("exit")) {
-                System.out.println("종료합니다");
-                break;
-            }
-            if (command.startsWith("new ")) {
-                processNewCommand(command.split(" "));
-                continue;
-            } else if (command.startsWith("change ")) {
-                processChangeCommand(command.split(" "));
-                continue;
-            } else if (command.equalsIgnoreCase("list")) {
-                processListCommand();
-                continue;
-            } else if (command.startsWith("info ")) {
-                processInfoCommand(command.split(" "));
-                continue;
-            }
-            printHelp();
-        }
+//        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+//        while (true) {
+//            System.out.println("명령어를 입력하세요");
+//            String command = reader.readLine();
+//            if (command.equalsIgnoreCase("exit")) {
+//                System.out.println("종료합니다");
+//                break;
+//            }
+//            if (command.startsWith("new ")) {
+//                processNewCommand(command.split(" "));
+//                continue;
+//            } else if (command.startsWith("change ")) {
+//                processChangeCommand(command.split(" "));
+//                continue;
+//            } else if (command.equalsIgnoreCase("list")) {
+//                processListCommand();
+//                continue;
+//            } else if (command.startsWith("info ")) {
+//                processInfoCommand(command.split(" "));
+//                continue;
+//            }
+//            printHelp();
+//        }
+
+        ctx = new AnnotationConfigApplicationContext(AppCtxWithExclude.class);
+        memberDao = ctx.getBean(MemberDao.class);
+
+        insertMember();
+        insertMember();
+        selectAll();
+    }
+
+    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMddHHmmss");
+
+    private static void insertMember() {
+        System.out.println("-----------insert Member");
+
+        String prefix = formatter.format(LocalDateTime.now());
+        Member member = new Member(
+                prefix + "@test.com",
+                prefix,
+                prefix,
+                LocalDateTime.now());
+
+        memberDao.insert(member);
+
+        System.out.println(member.getId() + "데이터 추가");
+    }
+
+    private static void selectAll() {
+        System.out.println("-----------selectAll");
+
+        Collection<Member> members = memberDao.selectAll();
+        members.stream().forEach(x -> System.out.println(x.getEmail()));
     }
 
     /**

@@ -34,7 +34,7 @@ public class MemberDao {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(con -> {
             PreparedStatement preparedStatement = con.prepareStatement(
-                    "insert into MEMBER(EMAIL. PASSWORD, NAME, REGDATE) values (?,?,?,?)",
+                    "insert into MEMBER(EMAIL, PASSWORD, NAME, REGDATE) values (?,?,?,?)",
                     new String[]{"ID"});
             preparedStatement.setString(1, member.getEmail());
             preparedStatement.setString(2, member.getPassword());
