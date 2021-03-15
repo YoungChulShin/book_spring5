@@ -2,6 +2,9 @@ package study.spring.ch2_di;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.sql.SQLException;
 
 @Component
 public class ChangePasswordService {
@@ -9,6 +12,7 @@ public class ChangePasswordService {
     @Autowired
     private MemberDao memberDao;
 
+    @Transactional(rollbackFor = SQLException.class)
     public void changePassword(String email, String oldPwd, String newPwd) {
         Member member = memberDao.selectByEmail(email);
         if (member == null) {
@@ -17,9 +21,5 @@ public class ChangePasswordService {
 
         member.changePassword(oldPwd, newPwd);
         memberDao.update(member);
-    }
-
-    public void setMemberDao(MemberDao memberDao) {
-        this.memberDao = memberDao;
     }
 }

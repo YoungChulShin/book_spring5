@@ -3,8 +3,12 @@ package study.spring.ch2_di.config;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
+@EnableTransactionManagement
 public class DbConfig {
 
     @Bean(destroyMethod = "close")
@@ -17,5 +21,12 @@ public class DbConfig {
         ds.setInitialSize(2);
         ds.setMaxAge(10);
         return ds;
+    }
+
+    @Bean
+    public PlatformTransactionManager transactionManager() {
+        DataSourceTransactionManager tm = new DataSourceTransactionManager();
+        tm.setDataSource(dataSource());
+        return tm;
     }
 }

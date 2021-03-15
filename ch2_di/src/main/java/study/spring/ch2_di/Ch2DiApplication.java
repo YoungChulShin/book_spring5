@@ -2,6 +2,7 @@ package study.spring.ch2_di;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.transaction.annotation.Transactional;
 import study.spring.ch2_di.config.AppCtxWithExclude;
 //import study.spring.ch2_di.config.AppCtx;
 
